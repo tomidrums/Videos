@@ -1,0 +1,54 @@
+{
+  "bpm": 115,
+  "bars": 2,
+  "variants": [
+    {
+      "id": "v1",
+      "numero": 1,
+      "titulo": "El clásico",
+      "subtitulo": "Hi-hat en corcheas, se abre en la \"y\"",
+      "tip": "Abrí el hi-hat en la \"y\" y cerralo justo cuando pisa el bombo",
+      "rows": {
+        "hihat": "x.o.x.o.x.o.x.o.",
+        "caja":  "....X.......X...",
+        "bombo": "k...k...k...k..."
+      }
+    },
+    {
+      "id": "v2",
+      "numero": 2,
+      "titulo": "Semicorcheas",
+      "subtitulo": "Más motor: hi-hat en semicorcheas",
+      "tip": "Alterná manos (D-I-D-I) en el hi-hat para que fluya más",
+      "rows": {
+        "hihat": "xxoxxxoxxxoxxxox",
+        "caja":  "....X.......X...",
+        "bombo": "k...k...k...k..."
+      }
+    },
+    {
+      "id": "v3",
+      "numero": 3,
+      "titulo": "Con ghost notes",
+      "subtitulo": "Notas fantasma en la caja = groove",
+      "tip": "Las ghost notes van casi sin levantar el palo: se sienten, no se escuchan",
+      "rows": {
+        "hihat": "x.o.x.o.x.o.x.o.",
+        "caja":  "...gX..g..g.X..g",
+        "bombo": "k...k...k...k..."
+      }
+    },
+    {
+      "id": "v4",
+      "numero": 4,
+      "titulo": "Campana del ride",
+      "subtitulo": "Ride en negras + campana en la \"y\"",
+      "tip": "Ideal para el estribillo: sube la energía sin cambiar el ritmo",
+      "rows": {
+        "ride":  "r.b.r.b.r.b.r.b.",
+        "caja":  "....X.......X...",
+        "bombo": "k...k...k...k..."
+      }
+    }
+  ]
+}

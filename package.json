@@ -1,0 +1,22 @@
+{
+  "name": "tomi-drums-videos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Videos de batería para TikTok/Reels de @tomi.drums hechos con Remotion",
+  "scripts": {
+    "audio": "node scripts/generate-audio.mjs",
+    "studio": "npm run audio && remotion studio",
+    "render": "npm run audio && remotion render RitmoDisco out/ritmo-disco.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.542",
+    "@remotion/fonts": "4.0.542",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.542"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.8",
+    "typescript": "5.8.3"
+  }
+}
