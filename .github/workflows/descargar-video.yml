@@ -1,0 +1,34 @@
+name: Descargar video
+on:
+  push:
+    branches: [descarga-ok-ru]
+    paths: [.github/workflows/descargar-video.yml]
+permissions:
+  contents: write
+env:
+  VIDEO_URL: https://ok.ru/video/16687540537967
+  TAG: ok-ru-16687540537967
+jobs:
+  descargar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instalar yt-dlp y ffmpeg
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install -U yt-dlp
+      - name: Ver formatos disponibles
+        run: yt-dlp -F "$VIDEO_URL"
+      - name: Descargar (mejor calidad hasta 1080p)
+        run: |
+          yt-dlp -f "bv*[height<=1080]+ba/b[height<=1080]/b" \
+            --merge-output-format mp4 \
+            -o "video-%(id)s-%(height)sp.%(ext)s" "$VIDEO_URL"
+          ls -lh *.mp4
+      - name: Subir como Release borrador (solo visible para vos)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$TAG" *.mp4 --draft \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "Video ok.ru 16687540537967" \
+            --notes "Descargado de $VIDEO_URL"
