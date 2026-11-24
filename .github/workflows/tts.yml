@@ -1,5 +1,10 @@
 name: tts
-on: [push, workflow_dispatch]
+on:
+  push:
+    paths: ['guion.json', '.github/workflows/tts.yml', 'retry.txt']
+  workflow_dispatch:
+permissions:
+  contents: write
 jobs:
   tts:
     runs-on: ubuntu-latest
@@ -19,8 +24,7 @@ jobs:
               open(f"out/{name}.wav", "wb").write(urllib.request.urlopen(req, timeout=180).read())
               print("ok", name)
           PY
-      - uses: actions/upload-artifact@v4
-        with:
-          name: voz
-          path: out/
-          retention-days: 1
+      - name: Guardar audios en la rama
+        run: |
+          git config user.name github-actions && git config user.email actions@github.com
+          git add out && git commit -m "voz generada" && git push
