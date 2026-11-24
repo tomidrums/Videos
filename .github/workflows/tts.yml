@@ -1,0 +1,26 @@
+name: tts
+on: [push, workflow_dispatch]
+jobs:
+  tts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generar voz con Fish Audio
+        env:
+          FISH_API_KEY: ${{ secrets.FISH_API_KEY }}
+        run: |
+          mkdir out
+          python3 - <<'PY'
+          import json, os, urllib.request
+          for name, text in json.load(open("guion.json", encoding="utf8")):
+              req = urllib.request.Request("https://api.fish.audio/v1/tts", method="POST",
+                  data=json.dumps({"text": text, "reference_id": "0abbe87e01074c82adba81892e9b8ecd", "format": "wav", "sample_rate": 44100}).encode(),
+                  headers={"Authorization": "Bearer " + os.environ["FISH_API_KEY"], "Content-Type": "application/json", "model": "s1"})
+              open(f"out/{name}.wav", "wb").write(urllib.request.urlopen(req, timeout=180).read())
+              print("ok", name)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: voz
+          path: out/
+          retention-days: 1
